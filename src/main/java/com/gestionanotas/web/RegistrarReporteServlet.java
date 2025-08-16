@@ -1,25 +1,21 @@
 package com.gestionanotas.web;
 
-import com.gestionanotas.dao.ReporteDAO;
 import com.gestionanotas.dao.EstudianteDAO;
-import com.gestionanotas.modulo.Reporte;
+import com.gestionanotas.dao.ReporteDAO;
 import com.gestionanotas.modulo.Estudiante;
+import com.gestionanotas.modulo.Reporte;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
-import java.util.List;
 
 @WebServlet("/RegistrarReporte")
 public class RegistrarReporteServlet extends HttpServlet {
@@ -55,7 +51,8 @@ public class RegistrarReporteServlet extends HttpServlet {
             String notaStr = request.getParameter("nota");
 
             // 2. Validación básica
-            if (asignatura == null || asignatura.trim().isEmpty() || notaStr == null || notaStr.trim().isEmpty()) {
+            if (asignatura == null || asignatura.trim().isEmpty() ||
+                notaStr == null || notaStr.trim().isEmpty()) {
                 String error = "❌ Asignatura y nota son obligatorias.";
                 System.out.println("[Error] " + error);
                 response.sendRedirect("registrarReporte.jsp?mensaje=" + URLEncoder.encode(error, "UTF-8"));
@@ -72,8 +69,8 @@ public class RegistrarReporteServlet extends HttpServlet {
                 return;
             }
 
-            int anioAcademico = 0;
-            int periodoAcademico = 0;
+            int anioAcademico;
+            int periodoAcademico;
 
             try {
                 anioAcademico = Integer.parseInt(anioStr.trim());
@@ -123,10 +120,11 @@ public class RegistrarReporteServlet extends HttpServlet {
             ReporteDAO reporteDAO = new ReporteDAO();
             long IdReporte = reporteDAO.registrarReporte(reporte); // ← debe retornar el ID generado
 
-            // 6. Redirigir a la plantilla si se guardó correctamente
+            // 6. Redirigir si se guardó correctamente
             if (IdReporte > 0) {
-                System.out.println("✅ Reporte guardado con ID: " + IdReporte);
-                response.sendRedirect("plantillaReporte?Id=" + IdReporte);
+                String exito = "✅ Reporte guardado con éxito. ID: " + IdReporte;
+                System.out.println("[Éxito] " + exito);
+                response.sendRedirect("registrarReporte.jsp?mensaje=" + URLEncoder.encode(exito, "UTF-8"));
             } else {
                 String error = "❌ No se pudo guardar el reporte.";
                 System.out.println("[Error] " + error);

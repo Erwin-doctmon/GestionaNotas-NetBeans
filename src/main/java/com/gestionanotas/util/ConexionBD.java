@@ -16,7 +16,7 @@ public class ConexionBD {
             Class.forName("com.mysql.cj.jdbc.Driver");
             return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();  // Muy importante para ver el error real
+            e.printStackTrace();
             return null;
         }
     }
