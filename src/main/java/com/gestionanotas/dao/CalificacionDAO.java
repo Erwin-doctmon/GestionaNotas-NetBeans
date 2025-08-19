@@ -37,7 +37,7 @@ public class CalificacionDAO {
                     ", Nota=" + calificacion.getNota();
             System.err.println("❌ " + mensaje);
             e.printStackTrace();
-            throw new RuntimeException(mensaje);  // ← Propaga el error al servlet
+            throw new RuntimeException(mensaje);  
         }
     }
 

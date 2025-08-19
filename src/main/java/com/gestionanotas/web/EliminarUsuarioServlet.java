@@ -18,7 +18,7 @@ public class EliminarUsuarioServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            Long idUsuario = Long.parseLong(request.getParameter("idUsuario")); // El name debe coincidir con tu JSP
+            Long idUsuario = Long.parseLong(request.getParameter("idUsuario")); 
             boolean eliminado = dao.eliminarUsuario(idUsuario);
 
             if (eliminado) {

@@ -22,7 +22,7 @@ public class RegistrarCalificacionServlet extends HttpServlet {
         System.out.println("🚨 Entró al método doPost de RegistrarCalificacion");
 
         try {
-            // Leer parámetros crudos
+            // Leer los parámetros /7
             String idUsuarioStr = request.getParameter("idUsuario");
             String docEstudianteStr = request.getParameter("Documento_Estudiante");
             String notaStr = request.getParameter("nota");
@@ -32,7 +32,7 @@ public class RegistrarCalificacionServlet extends HttpServlet {
             System.out.println("   Documento_Estudiante: " + docEstudianteStr);
             System.out.println("   Nota: " + notaStr);
 
-            // Validación básica
+            // Validación /7
             if (idUsuarioStr == null || docEstudianteStr == null || notaStr == null) {
                 System.out.println("❌ Parámetros nulos.");
                 response.sendRedirect("registrarCalificacion.jsp?error=Datos incompletos");
@@ -43,7 +43,7 @@ public class RegistrarCalificacionServlet extends HttpServlet {
             long documentoEstudiante = Long.parseLong(docEstudianteStr);
             double nota = Double.parseDouble(notaStr);
 
-            // Buscar ID de asignatura
+            // Buscar ID de asignatura //
             AsignaturaDAO asignaturaDAO = new AsignaturaDAO();
             int idAsignatura = asignaturaDAO.obtenerIdAsignaturaPorUsuario(idUsuario);
 
@@ -54,7 +54,7 @@ public class RegistrarCalificacionServlet extends HttpServlet {
                 return;
             }
 
-            // Crear calificación y registrar
+            // Crear calificación y registrar //
             Calificacion calificacion = new Calificacion(idAsignatura, documentoEstudiante, nota);
             CalificacionDAO calificacionDAO = new CalificacionDAO();
             boolean exito = calificacionDAO.insertar(calificacion);
@@ -70,7 +70,7 @@ public class RegistrarCalificacionServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
 
-            // Mostrar error directamente en pantalla
+            // Mostrar error directamente en pantalla //
             response.setContentType("text/html");
             response.getWriter().println("<h2>❌ ERROR DETECTADO</h2>");
             response.getWriter().println("<pre>" + e.getMessage() + "</pre>");

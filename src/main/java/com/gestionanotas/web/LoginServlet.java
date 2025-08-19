@@ -35,19 +35,19 @@ public class LoginServlet extends HttpServlet {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    // ✅ Obtener datos del usuario
-                    long idUsuario = rs.getLong("idUsuario"); // Asegúrate de que el campo se llama así en la BD
+                    // ✅ Obtener datos del usuario //
+                    long idUsuario = rs.getLong("idUsuario"); 
                     String rol = rs.getString("rol");
                     String apellido = rs.getString("apellido");
 
-                    // ✅ Guardar en sesión
+                    // ✅ Guardar sesión //
                     HttpSession session = request.getSession();
-                    session.setAttribute("idUsuario", idUsuario); // ← Clave para filtrar asignaturas
+                    session.setAttribute("idUsuario", idUsuario);
                     session.setAttribute("nombre", nombre);
                     session.setAttribute("apellido", apellido);
                     session.setAttribute("rol", rol);
 
-                    // ✅ Redirigir según el rol
+                    // ✅ Redirigir según el rol //
                     if ("Rector".equalsIgnoreCase(rol)) {
                         response.sendRedirect("menuRector.jsp");
                     } else if ("Docente".equalsIgnoreCase(rol)) {

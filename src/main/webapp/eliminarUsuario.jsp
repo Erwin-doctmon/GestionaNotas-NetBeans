@@ -6,7 +6,9 @@
 <%
     String idParam = request.getParameter("idUsuario");
     if ("POST".equalsIgnoreCase(request.getMethod())) {
-        // 🔹 Procesar eliminación directamente en este JSP
+
+// Procesar eliminación directamente en este JSP //
+
         try {
             Long id = Long.parseLong(idParam);
             UsuarioDAO dao = new UsuarioDAO();
@@ -24,7 +26,9 @@
             return;
         }
     } else if (idParam != null && request.getAttribute("usuario") == null) {
-        // 🔹 Mostrar confirmación antes de eliminar
+
+        // Mostrar confirmación antes de eliminar //
+
         try {
             Long id = Long.parseLong(idParam);
             UsuarioDAO dao = new UsuarioDAO();

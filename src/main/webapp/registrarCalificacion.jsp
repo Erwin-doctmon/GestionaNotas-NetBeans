@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>Registrar Calificación</title>
     <style>
-        /* MISMO DISEÑO QUE TENÍAS */
         body {
             font-family: 'Segoe UI', sans-serif;
             background-color: #ffffff;
@@ -93,15 +92,15 @@
 <form action="RegistrarCalificacion" method="post">
     <h2>📘 Registrar Calificación</h2>
 
-    <!-- ID del Docente -->
+    //ID del Docente//
     <label for="ID_Usuario">ID del Docente:</label>
     <input type="number" name="idUsuario" id="ID_Usuario" placeholder="Ej: 1076543210" required />
 
-    <!-- Documento del Estudiante -->
+    // Documento del Estudiante //
     <label for="Documento_Estudiante">Documento del Estudiante:</label>
     <input type="number" name="Documento_Estudiante" id="Documento_Estudiante" placeholder="Ej: 1023456789" required />
 
-    <!-- Nota -->
+    // Nota //
     <label for="nota">Nota:</label>
     <input type="number" step="0.1" min="0" max="5" name="nota" id="nota" placeholder="Ej: 4.5" required />
 
